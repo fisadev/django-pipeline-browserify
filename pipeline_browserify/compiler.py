@@ -22,6 +22,4 @@ class BrowserifyCompiler(SubProcessCompiler):
             infile,
             outfile
         )
-        print '\ncommand:', command
         return self.execute_command(command, cwd=dirname(infile))
-
