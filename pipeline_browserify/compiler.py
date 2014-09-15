@@ -7,7 +7,6 @@ class BrowserifyCompiler(SubProcessCompiler):
     output_extension = 'browserified.js'
 
     def match_file(self, path):
-        print '\nmatching file:', path
         return path.endswith('.browserify.js')
 
     def compile_file(self, infile, outfile, outdated=False, force=False):
