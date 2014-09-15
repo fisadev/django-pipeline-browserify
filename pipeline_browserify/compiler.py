@@ -11,9 +11,14 @@ class BrowserifyCompiler(SubProcessCompiler):
         return path.endswith('.browserify.js')
 
     def compile_file(self, infile, outfile, outdated=False, force=False):
+        file_args = getattr(settings, 'PIPELINE_BROWSERIFY_FILE_ARGUMENTS', {})
+        global_args = getattr(settings, 'PIPELINE_BROWSERIFY_ARGUMENTS', ''),
+
+        args = global_args + ' ' + file_args.get(infile, '')
+
         command = "%s %s %s > %s" % (
             getattr(settings, 'PIPELINE_BROWSERIFY_BINARY', '/usr/bin/env browserify'),
-            getattr(settings, 'PIPELINE_BROWSERIFY_ARGUMENTS', ''),
+            args,
             infile,
             outfile
         )
